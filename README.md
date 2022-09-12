@@ -120,7 +120,7 @@ class Product extends Model
 Publish the config file (optional):
 
 ```bash
-php artisan vendor:publish --provider="Laravelista\Comments\ServiceProvider" --tag=config
+php artisan vendor:publish --provider="Doloan09\Comments\ServiceProvider" --tag=config
 ```
 
 
@@ -129,7 +129,7 @@ php artisan vendor:publish --provider="Laravelista\Comments\ServiceProvider" --t
 The default UI is made for Bootstrap 4, but you can change it however you want.
 
 ```bash
-php artisan vendor:publish --provider="Laravelista\Comments\ServiceProvider" --tag=views
+php artisan vendor:publish --provider="Doloan09\Comments\ServiceProvider" --tag=views
 ```
 
 
@@ -138,7 +138,7 @@ php artisan vendor:publish --provider="Laravelista\Comments\ServiceProvider" --t
 You can publish migration to allow you to have more control over your table
 
 ```bash
-php artisan vendor:publish --provider="Laravelista\Comments\ServiceProvider" --tag=migrations
+php artisan vendor:publish --provider="Doloan09\Comments\ServiceProvider" --tag=migrations
 ```
 
 
@@ -147,7 +147,7 @@ php artisan vendor:publish --provider="Laravelista\Comments\ServiceProvider" --t
 The package currently only supports English, but I am open to PRs for other languages.
 
 ```bash
-php artisan vendor:publish --provider="Laravelista\Comments\ServiceProvider" --tag=translations
+php artisan vendor:publish --provider="Doloan09\Comments\ServiceProvider" --tag=translations
 ```
 
 
@@ -218,9 +218,9 @@ You can configure the maximum indentation level like so:
 
 This package fires events to let you know when things happen.
 
-- `Laravelista\Comments\Events\CommentCreated`
-- `Laravelista\Comments\Events\CommentUpdated`
-- `Laravelista\Comments\Events\CommentDeleted`
+- `Doloan09\Comments\Events\CommentCreated`
+- `Doloan09\Comments\Events\CommentUpdated`
+- `Doloan09\Comments\Events\CommentDeleted`
 
 
 ## REST API
@@ -228,10 +228,10 @@ This package fires events to let you know when things happen.
 To change the controller or the routes, see the config.
 
 ```
-Route::post('comments', '\Laravelista\Comments\CommentController@store')->name('comments.store');
-Route::delete('comments/{comment}', '\Laravelista\Comments\CommentController@destroy')->name('comments.destroy');
-Route::put('comments/{comment}', '\Laravelista\Comments\CommentController@update')->name('comments.update');
-Route::post('comments/{comment}', '\Laravelista\Comments\CommentController@reply')->name('comments.reply');
+Route::post('comments', '\Doloan09\Comments\CommentController@store')->name('comments.store');
+Route::delete('comments/{comment}', '\Doloan09\Comments\CommentController@destroy')->name('comments.destroy');
+Route::put('comments/{comment}', '\Doloan09\Comments\CommentController@update')->name('comments.update');
+Route::post('comments/{comment}', '\Doloan09\Comments\CommentController@reply')->name('comments.reply');
 ```
 
 
