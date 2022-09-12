@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravelista\Comments;
+namespace Doloan09\Comments;
 
 use Illuminate\Support\Facades\Config;
 

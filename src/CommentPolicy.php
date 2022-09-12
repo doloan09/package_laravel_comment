@@ -1,8 +1,8 @@
 <?php
 
-namespace Laravelista\Comments;
+namespace Doloan09\Comments;
 
-use Laravelista\Comments\Comment;
+use Doloan09\Comments\Comment;
 
 class CommentPolicy
 {

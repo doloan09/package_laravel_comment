@@ -74,7 +74,7 @@ I plan to expand this chapter with more tutorials and articles. If you write som
 From the command line:
 
 ```bash
-composer require laravelista/comments
+composer require doloan09/comments
 ```
 
 

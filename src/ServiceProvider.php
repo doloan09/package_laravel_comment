@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravelista\Comments;
+namespace Doloan09\Comments;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
