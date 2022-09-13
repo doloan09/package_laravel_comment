@@ -1,9 +1,9 @@
 {
-    "name": "laravelista/comments",
+    "name": "doloan09/package_laravel_comment",
     "description": "Comments for Laravel.",
     "keywords": [
         "doloan09",
-        "laravel_comment"
+        "package_laravel_comment"
     ],
     "license": "MIT",
     "authors": [
