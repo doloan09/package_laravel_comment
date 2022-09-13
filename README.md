@@ -74,7 +74,7 @@ I plan to expand this chapter with more tutorials and articles. If you write som
 From the command line:
 
 ```bash
-composer require doloan09/comments
+composer require doloan09/package_laravel_comment
 ```
 
 
@@ -92,7 +92,7 @@ php artisan migrate
 Add the `Commenter` trait to your User model so that you can retrieve the comments for a user:
 
 ```php
-use Laravelista\Comments\Commenter;
+use Doloan09\Comments\Commenter;
 
 class User extends Authenticatable
 {
@@ -106,7 +106,7 @@ class User extends Authenticatable
 Add the `Commentable` trait to the model for which you want to enable comments for:
 
 ```php
-use Laravelista\Comments\Commentable;
+use Doloan09\Comments\Commentable;
 
 class Product extends Model
 {
