@@ -5,6 +5,7 @@ return [
     'authentication_required' => 'Authentication required',
     'you_must_login_to_post_a_comment' => 'You must log in to post a comment.',
     'log_in' => 'Log in',
+    'like' => 'Like',
     'reply' => 'Reply',
     'edit' => 'Edit',
     'delete' => 'Delete',

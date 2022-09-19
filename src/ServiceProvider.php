@@ -81,6 +81,10 @@ class ServiceProvider extends LaravelServiceProvider
         ], 'config');
 
         $this->publishes([
+            __DIR__ . '/../config/likes.php' => App::configPath('likes.php'),
+        ], 'config');
+
+        $this->publishes([
             __DIR__ . '/../resources/lang' => App::resourcePath('lang/vendor/comments'),
         ], 'translations');
 

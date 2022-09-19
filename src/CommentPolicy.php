@@ -52,5 +52,10 @@ class CommentPolicy
     {
         return $user->getKey() != $comment->commenter_id;
     }
+
+    public function like() : bool
+    {
+        return true;
+    }
 }
 

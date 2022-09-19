@@ -4,7 +4,6 @@
     $markdown->setSafeMode(true);
 @endphp
 
-
 @php
     $user = \Illuminate\Support\Facades\Auth::user();
     $id_user = '';
@@ -13,7 +12,7 @@
     }
 @endphp
 
-<div id="comment-{{ $comment->getKey() }}" class="mt-6">
+<div id="comment-{{ $comment->getKey() }}" class="border-l-2 border-red-500 relative" >
     <div class="grid grid-cols-12">
         <img class="col-span-2 md:col-span-1 rounded-full text-center h-9 w-9 md:h-11 md:w-11 md:ml-6" src="https://thechatvietnam.com/storage/users/default.png" alt="{{ $comment->commenter->name ?? $comment->guest_name }} Avatar">
         <div class="media-body col-span-10 md:col-span-11">
@@ -46,14 +45,10 @@
             </div>
 
             @can('edit-comment', $comment)
-                <div class="hidden mb-4" id="comment-modal-{{ $comment->getKey() }}" tabindex="-1" role="dialog">
+                <div class="hidden my-4" id="comment-modal-{{ $comment->getKey() }}" tabindex="-1" role="dialog">
                     <form method="POST" action="{{ route('comments.update', $comment->getKey()) }}">
                         @method('PUT')
                         @csrf
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
-                            </button>
-                        </div>
                         <div class="modal-body">
                             <div class="form-group">
                                 <textarea required class="border-2 w-full p-2 form-control" placeholder="Viết bình luận ...." name="message" rows="3">{{ $comment->comment }}</textarea>
@@ -68,13 +63,9 @@
             @endcan
 
             @can('reply-to-comment', $comment)
-                <div class="hidden" id="reply-modal-{{ $comment->getKey() }}" tabindex="-1" role="dialog">
+                <div class="hidden my-4" id="reply-modal-{{ $comment->getKey() }}" tabindex="-1" role="dialog">
                     <form method="POST" action="{{ route('comments.reply', $comment->getKey()) }}">
                         @csrf
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
-                            </button>
-                        </div>
                         <div class="modal-body">
                             <div class="form-group">
                                 <textarea required class="border-2 w-full form-control p-2" placeholder="Viết phản hồi ...." name="message" rows="3"></textarea>
@@ -97,17 +88,6 @@
                     $indentationLevel++;
                 }
                 ?>
-
-            {{-- Recursion for children --}}
-            @if($grouped_comments->has($comment->getKey()) && $indentationLevel <= $maxIndentationLevel)
-                {{-- TODO: Don't repeat code. Extract to a new file and include it. --}}
-                @foreach($grouped_comments[$comment->getKey()] as $child)
-                    @include('comments::_comment_child', [
-                        'comment' => $child,
-                        'grouped_comments' => $grouped_comments
-                    ])
-                @endforeach
-            @endif
         </div>
     </div>
 </div>
@@ -138,6 +118,17 @@
         </div>
     </div>
 </div>
+
+{{-- Recursion for children --}}
+@if($grouped_comments->has($comment->getKey()) && $indentationLevel <= $maxIndentationLevel)
+    {{-- TODO: Don't repeat code. Extract to a new file and include it. --}}
+    @foreach($grouped_comments[$comment->getKey()] as $child)
+        @include('comments::_comment_child', [
+            'comment' => $child,
+            'grouped_comments' => $grouped_comments
+        ])
+    @endforeach
+@endif
 
 @push('scripts')
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
@@ -239,7 +230,6 @@
                     liketable_id: $id_comment,
                 },
                 success: function(data){
-                    // alert($id_comment);
                     $("#delete-like-modal-" + $id_comment).show();
                     $("#like-modal-" + $id_comment).hide();
                     location.reload();
@@ -259,7 +249,6 @@
                     liker_id: $id_user,
                 },
                 success: function(data){
-                    // alert('delete');
                     $("#delete-like-modal-" + $id_comment).hide();
                     $("#like-modal-" + $id_comment).show();
                     location.reload();

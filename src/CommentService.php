@@ -36,9 +36,9 @@ class CommentService
             'message' => 'required|string'
         ]))->validate();
 
-        $model = $request->commentable_type::findOrFail($request->commentable_id);
+        $model = $request->commentable_type::findOrFail($request->commentable_id); // tra ve 1 bai viet
 
-        $commentClass = Config::get('comments.model');
+        $commentClass = Config::get('comments.model'); //  \Doloan09\Comments\Comment::class,
         $comment = new $commentClass;
 
         if (!Auth::check()) {

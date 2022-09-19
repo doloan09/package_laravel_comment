@@ -18,6 +18,7 @@ return [
         'delete-comment' => 'Doloan09\Comments\CommentPolicy@delete',
         'edit-comment' => 'Doloan09\Comments\CommentPolicy@update',
         'reply-to-comment' => 'Doloan09\Comments\CommentPolicy@reply',
+        'like-comment' => 'Doloan09\Comments\CommentPolicy@like',
     ],
 
     /**
