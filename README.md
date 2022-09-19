@@ -34,32 +34,6 @@ All comments are stored in a single table with a polymorphic relation for conten
 - Optionally load package migrations [NEW]
 - Configure maximum indentation level [NEW]
 
-
-### Screenshots
-
-Here are a few screenshots.
-
-No comments & guest:
-
-![](https://i.imgur.com/9df4Xun.png)
-
-No comments & logged in:
-
-![](https://i.imgur.com/ALI6GbR.png)
-
-One comment:
-
-![](https://i.imgur.com/9wBNiy2.png)
-
-One comment edit form:
-
-![](https://i.imgur.com/cxDh34O.png)
-
-Two comments from different users:
-
-![](https://i.imgur.com/2P5u25x.png)
-
-
 ### Tutorials & articles
 
 I plan to expand this chapter with more tutorials and articles. If you write something about this package let me know, so that I can update this chapter.
