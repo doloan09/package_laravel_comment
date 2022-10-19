@@ -2,9 +2,14 @@
 
 namespace Doloan09\Comments;
 
+use App\Models\Article;
+use App\Models\User;
+use Doloan09\Comments\Notifications\LikeCmtNotify;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 
@@ -29,6 +34,16 @@ class LikeController extends Controller
             $like->liker_type = $request->liker_type;
             $like->liketable_id = $request->liketable_id;
             $like->save();
+
+            // notifincation
+            $userLike = User::where('id', $request->liker_id)->first();
+            $info = Comment::where('id', $request->liketable_id)->select('commenter_id', 'commentable_id')->first(); // lay ra id user cua chu comment
+
+            $slug_article = Article::where('id', $info['commentable_id'])->first();
+            if ($request->liker_id != $info['commenter_id']) {
+                $user = User::where('id', $info['commenter_id'])->first(); // notifiable_id: id cua nguoi nhan thong bao -> chu comment
+                Notification::send($user, new LikeCmtNotify($userLike, $slug_article['slug'])); // Auth::user() -> data: thong tin nguoi like comment
+            }
         }
         return $like;
     }
