@@ -111,7 +111,7 @@
                             Những người đã thích
                         </span>
                 </div>
-                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left pb-4" id="list_liker">
+                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left pb-4" id="list_liker2">
                     {{--        list liker        --}}
                 </div>
             </div>
@@ -129,3 +129,136 @@
         ])
     @endforeach
 @endif
+
+@push('scripts')
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+        function toggleModal(modalID){
+            document.getElementById(modalID).classList.toggle("hidden");
+        }
+
+        //----------------like - unlike-------------------------
+        get_likeK({{ $comment->getKey() }}, {{ $id_user }});
+        function get_likeK($id_comment, $id_user){
+            $.ajax({
+                type: "GET",
+                url: '/likes/' + $id_comment + '/' + $id_user,
+                success: function(data){
+                    if (data['status'] === 'true'){
+                        $("#delete-like-modal-" + $id_comment).show();
+                        $("#like-modal-" + $id_comment).hide();
+                    }
+                    if (data['status'] === 'false') {
+                        $("#delete-like-modal-" + $id_comment).hide();
+                        $("#like-modal-" + $id_comment).show();
+                    }
+                },
+                error: function(xhr, status, error){
+                    alert(error);
+                }
+            });
+        }
+
+        // -----------------sum-liker----------------
+        sum_like();
+        function sum_like(){
+            $.ajax({
+                type: "GET",
+                url: '/sum-likes/' + {{$comment->getKey()}},
+                success: function(data){
+                    if (data['data'] > 0){
+                        btn = `<button class="grid grid-cols-2 border-2 px-1 float-right rounded-full text-blue-700 text-center" onclick="getListLike({{ $comment->getkey() }})">
+                                    <p>` + data['data'] + `</p>
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"></path>
+                                        </svg>
+                                    </span>
+                                </button>`;
+                        document.getElementById('sum_like_' + {{ $comment->getKey() }}).innerHTML = btn;
+                    }
+                },
+                error: function(xhr, status, error){
+                    // alert(error);
+                }
+            });
+        }
+
+        // -----------list_liker----------------------
+        // getListLike(1);
+        function getListLike($id_comment){
+            $.ajax({
+                type: "GET",
+                url: '/list-liker/' + $id_comment,
+                success: function(data){
+                    listLiker = data['data'];
+                    sizeData = listLiker.length;
+                    str = '';
+
+                    for (let i = 0; i< sizeData; i++){
+                        str += `<div class="ml-8 modal-body mt-4 grid grid-cols-1 gap-3"><div class="flex items-center">
+                            <a class="avatar mr-2">
+                            <img class="rounded-full" src="https://thechatvietnam.com/storage/users/default.png" alt="img" width="35px">
+                            </a>
+                            <b><span class="name mb-0 text-sm">` + listLiker[i]['name'] + `</span></b>
+                            </div>
+                            </div>`;
+                    }
+
+                    document.getElementById('list_liker2').innerHTML = str;
+                    $("#like_modal").show();
+
+                },
+                error: function(xhr, status, error){
+                    // alert(error);
+                }
+            });
+        }
+
+        function change(){
+            $("#like_modal").hide();
+        }
+
+        // ------------------------
+        function likeK($id_comment, $id_user){
+            $.ajax({
+                type: "POST",
+                url: '/likes',
+                data: {
+                    liker_id: $id_user,
+                    liker_type: '\\Doloan09\\Comments\\Comment',
+                    liketable_id: $id_comment,
+                },
+                success: function(data){
+                    $("#delete-like-modal-" + $id_comment).show();
+                    $("#like-modal-" + $id_comment).hide();
+                    location.reload();
+                },
+                error: function(xhr, status, error){
+                    alert(error);
+                }
+            });
+        }
+
+        //-----------------------------------
+        function delete_likeK($id_comment, $id_user){
+            $.ajax({
+                type: "DELETE",
+                url: '/likes/' + $id_comment ,
+                data: {
+                    liker_id: $id_user,
+                },
+                success: function(data){
+                    $("#delete-like-modal-" + $id_comment).hide();
+                    $("#like-modal-" + $id_comment).show();
+                    location.reload();
+                },
+                error: function(xhr, status, error){
+                    alert(error);
+                }
+            });
+        }
+
+    </script>
+@endpush
