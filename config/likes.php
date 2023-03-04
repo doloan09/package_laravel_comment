@@ -10,6 +10,11 @@ return [
     'model' => \Doloan09\Comments\Likes::class,
 
     /**
+     * thay doi de phu hop voi database cua ban - '\App\Models\Article' hoac '\App\Models\Post'
+     */
+    'liketable_type' => '\App\Models\Article',
+
+    /**
      * You can customize the behaviour of these permissions by
      * creating your own and pointing to it here.
      */

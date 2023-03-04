@@ -194,6 +194,37 @@
             });
         }
 
+        // -----------list_liker----------------------
+        // getListLike(1);
+        function getListLike($id_comment){
+            $.ajax({
+                type: "GET",
+                url: '/list-liker/' + $id_comment,
+                success: function(data){
+                    listLiker = data['data'];
+                    sizeData = listLiker.length;
+                    str = '';
+
+                    for (let i = 0; i< sizeData; i++){
+                        str += `<div class="ml-8 modal-body mt-4 grid grid-cols-1 gap-3"><div class="flex items-center">
+                            <a class="avatar mr-2">
+                            <img class="rounded-full" src="https://1.bp.blogspot.com/-HhU9edRL9Q8/YU1CjMlHZvI/AAAAAAAANt4/RKMHAtXYD_MqJOr3UbkiGN7ZkCz8Oy95gCLcBGAsYHQ/w800-h800-p-k-no-nu/Mailovesbeauty_LifeStyle%2BBlog.JPG" alt="img" width="35px">
+                            </a>
+                            <b><span class="name mb-0 text-sm">` + listLiker[i]['name'] + `</span></b>
+                            </div>
+                            </div>`;
+                    }
+
+                    document.getElementById('list_liker').innerHTML = str;
+                    $("#like_modal").show();
+
+                },
+                error: function(xhr, status, error){
+                    // alert(error);
+                }
+            });
+        }
+
         function change(){
             $("#like_modal").hide();
         }

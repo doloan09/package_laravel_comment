@@ -111,7 +111,7 @@
                             Những người đã thích
                         </span>
                 </div>
-                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left pb-4" id="list_liker2">
+                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left pb-4" id="list_liker">
                     {{--        list liker        --}}
                 </div>
             </div>
@@ -206,7 +206,7 @@
                             </div>`;
                     }
 
-                    document.getElementById('list_liker2').innerHTML = str;
+                    document.getElementById('list_liker').innerHTML = str;
                     $("#like_modal").show();
 
                 },
